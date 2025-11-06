@@ -1,4 +1,4 @@
-import { FeatureFlagProvider } from "@/src/components/feature-flag";
+import { FeatureFlagProvider } from "@/src/core/providers/feature-flag";
 import flagsmith from "flagsmith/isomorphic";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
@@ -30,6 +30,14 @@ export default async function RootLayout({
   });
 
   const serverState = flagsmith.getState();
+
+  // // I am setting a user identity to demonstrate targeting -- Will vary per user in a real app
+  // await flagsmith.identify("Development_user_123456");
+
+  // I am setting a trait to demonstrate targeting -- Will vary per user in a real app
+  // await flagsmith.identify("user", {
+  //   role: "quality_assurance",
+  // });
 
   return (
     <html lang="en">

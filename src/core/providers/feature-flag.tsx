@@ -2,16 +2,16 @@
 
 import { createFlagsmithInstance } from "flagsmith/isomorphic";
 import { FlagsmithProvider, IState } from "flagsmith/react";
-import { useRef } from "react";
+import { useState } from "react";
 
 export const FeatureFlagProvider: React.FC<{ children: React.ReactNode, serverState: IState }> = ({
   children,
   serverState
 }) => {
-  const flagsmithInstance = useRef(createFlagsmithInstance());
+  const [flagsmithInstance] = useState(() => createFlagsmithInstance());
 
   return (
-    <FlagsmithProvider flagsmith={flagsmithInstance.current} serverState={serverState}>
+    <FlagsmithProvider flagsmith={flagsmithInstance} serverState={serverState}>
       <>{children}</>
     </FlagsmithProvider>
   );
